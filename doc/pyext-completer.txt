@@ -1,0 +1,7 @@
+*pyext-completer.txt*   Automatically adds py extension when opening a file
+
+Author:  Sergiy Byelozyorov <http://sergiyb.com/>
+License: 3-clause BSD License, see LICENSE file
+
+This is a Vim plugin that opens `file.py` if you've asked it to edit `file`. If
+`file` exists or `file.py` doesn't, it does nothing.
