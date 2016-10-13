@@ -3,10 +3,4 @@
 Author:  Sergiy Byelozyorov <http://sergiyb.com/>
 License: 3-clause BSD License, see LICENSE file
 
-This is a Vim plugin that opens `file.py` if you've asked it to edit `file`. If
-`file` exists or `file.py` doesn't, it does not interefe.
-
-Supported extensions:
- - .py
- - .go
- - .html
+See README.md for more details.
