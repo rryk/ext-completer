@@ -6,23 +6,29 @@
 if exists('g:loaded_ext_completer') || (v:version < 700)
   finish
 endif
+
 let g:loaded_ext_completer = 1
 
+" ext-completer will try adding all of these extensions in order, i.e. if there
+" is file.py and file.js in the dir and the list contains ["py", "js"], then
+" file.py will be opened since it will be tried first.
+let g:supported_extensions = ["py", "go", "html", "js"]
+
+
 function! s:try_open_pyfile()
-  let pyfile = bufname("%") . ".py"
-  if (filereadable(pyfile))
-    exec ":edit " . pyfile
-  endif
+  for extension in g:supported_extensions
+    " Try adding a dot and an extension.
+    let file_with_ext = bufname("%") . "." . extension
+    if (filereadable(file_with_ext))
+      exec ":edit " . file_with_ext
+    endif
 
-  let gofile = bufname("%") . ".go"
-  if (filereadable(gofile))
-    exec ":edit " . gofile
-  endif
-
-  let htmlfile = bufname("%") . ".html"
-  if (filereadable(htmlfile))
-    exec ":edit " . htmlfile
-  endif
+    " Also try adding just extension (in case dot is already present).
+    let file_with_ext = bufname("%") . extension
+    if (filereadable(file_with_ext))
+      exec ":edit " . file_with_ext
+    endif
+  endfor
 endfunction
 
 autocmd! BufNewFile * nested call s:try_open_pyfile()
