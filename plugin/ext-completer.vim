@@ -12,11 +12,13 @@ let g:loaded_ext_completer = 1
 " ext-completer will try adding all of these extensions in order, i.e. if there
 " is file.py and file.js in the dir and the list contains ["py", "js"], then
 " file.py will be opened since it will be tried first.
-let g:supported_extensions = ["py", "go", "html", "js"]
+if !exists("g:ext_completer_extensions")
+  let g:ext_completer_extensions = ["py", "go", "html", "js"]
+endif
 
 
 function! s:try_open_pyfile()
-  for extension in g:supported_extensions
+  for extension in g:ext_completer_extensions
     " Try adding a dot and an extension.
     let file_with_ext = bufname("%") . "." . extension
     if (filereadable(file_with_ext))
